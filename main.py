@@ -2,6 +2,7 @@
 # パルス周波数テーブル作る
 #
 import math
+import matplotlib.pyplot as plt
 
 def main():
     # 初期条件やら最大パルスやら
@@ -27,6 +28,14 @@ def main():
     with open("freqTable.csv", "w") as f:
         f.write(",\n".join(["{0:.3f}".format(f) for f in pulseFreqs]))
 
+    # グラフにしてみる
+    fig = plt.figure(figsize=(6, 4), dpi=72)
+    ax = fig.add_subplot(1, 1, 1)
+    ax.plot(pulseFreqs, color="#800000")
+    ax.plot(graValues, color="#000080")
+    plt.show() # 結局よくわからん なんかもっと見やすいやり方はあるんだと思う
+
+
 # パルス周波数を計算する
 def calcPulseFreq(f0, a, n):
     fn = math.sqrt(f0 * f0 + 2 * a * n)
@@ -36,7 +45,7 @@ if __name__ == "__main__":
     main()
     try:
         print("Type Ctrl+C to exit.")
-        while True:
+        while False:
             pass
     except KeyboardInterrupt:
         pass
